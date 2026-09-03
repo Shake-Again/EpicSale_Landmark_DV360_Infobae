@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiendas Landmark — Propuesta Programmatic Infobae | SALE 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rojo:       #8C1F28;
+      --rojo-vivo:  #C0272D;
+      --oscuro:     #111111;
+      --gris-1:     #1E1E1E;
+      --gris-2:     #2D2D2D;
+      --gris-3:     #444444;
+      --gris-texto: #9A9A9A;
+      --blanco:     #FFFFFF;
+      --fuente:     'Montserrat', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--oscuro);
+      color: var(--blanco);
+      font-family: var(--fuente);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* ── UTILIDADES ── */
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border: 1px solid var(--rojo);
+      color: var(--rojo);
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: var(--rojo);
+      color: var(--blanco);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 2px;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 64px 72px;
+      position: relative;
+      overflow: hidden;
+      background: var(--oscuro);
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 30%, rgba(140,31,40,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(140,31,40,.10) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cover-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gris-texto);
+      margin-bottom: 28px;
+    }
+
+    .cover h1 {
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 800;
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+      margin-bottom: 24px;
+    }
+
+    .cover h1 span { color: var(--rojo-vivo); }
+
+    .cover-sub {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--gris-texto);
+      max-width: 480px;
+      margin-bottom: 48px;
+      line-height: 1.7;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 48px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    .cover-meta-item span {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gris-3);
+      margin-bottom: 4px;
+    }
+
+    .cover-meta-item strong {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blanco);
+    }
+
+    .cover-line {
+      width: 48px;
+      height: 2px;
+      background: var(--rojo);
+      margin-bottom: 56px;
+    }
+
+    /* ── SECCIONES ── */
+    section { padding: 96px 72px; }
+
+    section:nth-child(even) { background: var(--gris-1); }
+
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: -.01em;
+      margin-bottom: 20px;
+    }
+
+    .section-lead {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--gris-texto);
+      max-width: 600px;
+      margin-bottom: 56px;
+      line-height: 1.75;
+    }
+
+    .divider {
+      width: 40px;
+      height: 2px;
+      background: var(--rojo);
+      margin-bottom: 56px;
+    }
+
+    /* ── CONTEXTO / INTRO ── */
+    .contexto-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .ctx-card {
+      background: var(--gris-2);
+      padding: 36px;
+    }
+
+    .ctx-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--gris-3);
+      margin-bottom: 10px;
+    }
+
+    .ctx-card-value {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--blanco);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .ctx-card-desc {
+      font-size: 13px;
+      color: var(--gris-texto);
+      line-height: 1.6;
+    }
+
+    .ctx-card.accent { background: var(--rojo); }
+    .ctx-card.accent .ctx-card-label { color: rgba(255,255,255,.5); }
+    .ctx-card.accent .ctx-card-desc  { color: rgba(255,255,255,.75); }
+
+    /* ── CANALES ── */
+    .canal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .canal-block {
+      background: var(--gris-2);
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .canal-block::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--rojo);
+    }
+
+    .canal-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .canal-block h3 {
+      font-size: 20px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      margin-bottom: 8px;
+    }
+
+    .canal-block .canal-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 24px;
+    }
+
+    .canal-block p {
+      font-size: 14px;
+      color: var(--gris-texto);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    /* ── TÁCTICA ROWS ── */
+    .tactica-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0 28px;
+      align-items: start;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--gris-2);
+    }
+
+    .tactica-row:last-child { border-bottom: none; }
+
+    .tactica-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--rojo);
+      padding-top: 3px;
+    }
+
+    .tactica-content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 6px;
+    }
+
+    .tactica-content p {
+      font-size: 13px;
+      color: var(--gris-texto);
+      line-height: 1.65;
+    }
+
+    /* ── PUBLISHERS GRID ── */
+    .pub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 40px;
+    }
+
+    .pub-card {
+      background: var(--gris-2);
+      padding: 28px 24px;
+    }
+
+    .pub-card-name {
+      font-size: 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      margin-bottom: 6px;
+    }
+
+    .pub-card-type {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--rojo);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .pub-card-desc {
+      font-size: 12px;
+      color: var(--gris-texto);
+      line-height: 1.6;
+    }
+
+    .pub-card.highlight {
+      background: var(--gris-1);
+      border: 1px solid var(--rojo);
+    }
+
+    /* ── FORMATOS ── */
+    .formato-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 40px;
+    }
+
+    .formato-card {
+      background: var(--gris-2);
+      padding: 28px 20px;
+      text-align: center;
+    }
+
+    .formato-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 8px;
+    }
+
+    .formato-card-size {
+      font-size: 17px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .formato-card-desc {
+      font-size: 11px;
+      color: var(--gris-texto);
+      line-height: 1.5;
+    }
+
+    /* ── DOOH ── */
+    .dooh-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-bottom: 2px;
+    }
+
+    .dooh-card {
+      background: var(--gris-2);
+      padding: 44px;
+    }
+
+    .dooh-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--rojo);
+      margin-bottom: 16px;
+    }
+
+    .dooh-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .dooh-card ul li {
+      font-size: 13px;
+      color: var(--gris-texto);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gris-3);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .dooh-card ul li:last-child { border-bottom: none; }
+
+    .dooh-card ul li::before {
+      content: '—';
+      color: var(--rojo);
+      flex-shrink: 0;
+      font-weight: 700;
+    }
+
+    .dooh-card.dark { background: var(--oscuro); }
+
+    .dooh-card p {
+      font-size: 13px;
+      color: var(--gris-texto);
+      line-height: 1.7;
+    }
+
+    .dooh-card .stat-big {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--blanco);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .dooh-card .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gris-texto);
+    }
+
+    .dooh-accent {
+      background: var(--rojo);
+      padding: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .dooh-accent h4 {
+      font-size: 22px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .dooh-accent p {
+      font-size: 13px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.7;
+    }
+
+    /* ── TIMING ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      margin-top: 40px;
+    }
+
+    .tl-item {
+      background: var(--gris-2);
+      padding: 28px 20px;
+      position: relative;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--gris-3);
+    }
+
+    .tl-item.active::before { background: var(--rojo); }
+
+    .tl-period {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gris-texto);
+      margin-bottom: 10px;
+    }
+
+    .tl-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 8px;
+    }
+
+    .tl-desc {
+      font-size: 11px;
+      color: var(--gris-texto);
+      line-height: 1.6;
+    }
+
+    /* ── KPIs ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 40px;
+    }
+
+    .kpi-card {
+      background: var(--gris-2);
+      padding: 32px 24px;
+    }
+
+    .kpi-name {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 10px;
+    }
+
+    .kpi-metric {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .kpi-desc {
+      font-size: 11px;
+      color: var(--gris-texto);
+      line-height: 1.5;
+    }
+
+    /* ── PRÓXIMOS PASOS ── */
+    .pasos-list {
+      counter-reset: pasos;
+      margin-top: 40px;
+    }
+
+    .paso {
+      counter-increment: pasos;
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 0;
+      margin-bottom: 2px;
+    }
+
+    .paso-num {
+      background: var(--gris-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gris-3);
+      padding: 32px;
+    }
+
+    .paso-body {
+      background: var(--gris-2);
+      padding: 28px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .paso-body h4 {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .paso-body p {
+      font-size: 13px;
+      color: var(--gris-texto);
+      line-height: 1.6;
+    }
+
+    .paso.destacado .paso-num { background: var(--rojo); color: var(--blanco); }
+    .paso.destacado .paso-body { background: var(--gris-1); border-left: 2px solid var(--rojo); }
+
+    /* ── CIERRE ── */
+    .cierre {
+      background: var(--rojo) !important;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .cierre h2 {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -.01em;
+    }
+
+    .cierre p {
+      font-size: 14px;
+      color: rgba(255,255,255,.7);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .cierre-brand {
+      margin-top: 24px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      section { padding: 64px 32px; }
+      .cover  { padding: 48px 32px; }
+      .canal-grid,
+      .contexto-grid,
+      .dooh-split { grid-template-columns: 1fr; }
+      .pub-grid { grid-template-columns: 1fr 1fr; }
+      .formato-grid { grid-template-columns: 1fr 1fr; }
+      .timeline { grid-template-columns: 1fr 1fr; }
+      .kpi-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      section { padding: 48px 20px; }
+      .cover  { padding: 40px 20px; }
+      .pub-grid,
+      .formato-grid,
+      .kpi-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: 1fr; }
+      .paso { grid-template-columns: 56px 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════ COVER ═══════════════════════════════════ -->
+<div class="cover">
+  <p class="cover-eyebrow">Tiendas Landmark · Propuesta Programmatic — Infobae</p>
+  <div class="cover-line"></div>
+
+  <h1>SALE<br /><span>2026</span></h1>
+
+  <p class="cover-sub">
+    Propuesta de activación programmatic directa con Infobae para amplificar el alcance del evento de ventas fuera de los canales de performance habituales.
+  </p>
+
+  <div class="cover-meta">
+    <div class="cover-meta-item">
+      <span>Período</span>
+      <strong>01 Sep — 30 Sep 2026</strong>
+    </div>
+    <div class="cover-meta-item">
+      <span>Canal propuesto</span>
+      <strong>Programmatic · Infobae</strong>
+    </div>
+    <div class="cover-meta-item">
+      <span>Preparado por</span>
+      <strong>ShakeAgain · Performance</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════ CONTEXTO ════════════════════════════════ -->
+<section>
+  <p class="section-eyebrow">01 — Contexto</p>
+  <h2 class="section-title">¿Por qué ir más allá<br />de Meta y Google?</h2>
+  <div class="divider"></div>
+
+  <div class="contexto-grid">
+    <div class="ctx-card accent">
+      <p class="ctx-card-label">El objetivo</p>
+      <p class="ctx-card-value">Masificar el evento</p>
+      <p class="ctx-card-desc">
+        El SALE es un momento de mayor propensión de compra. Para que ese momento tenga impacto real en volumen y ticket, se necesita que la marca esté presente donde el usuario consume contenido — antes de que llegue a Meta o Google.
+      </p>
+    </div>
+    <div class="ctx-card">
+      <p class="ctx-card-label">El problema del ecosistema actual</p>
+      <p class="ctx-card-value">Alcance limitado a audiencias<br />ya activadas</p>
+      <p class="ctx-card-desc">
+        Meta y Google capturan a quien ya tiene intención o ya conoce la marca. Programmatic opera en la capa superior del funnel: genera demanda antes de que exista búsqueda, ampliando el universo de personas impactadas por la campaña.
+      </p>
+    </div>
+    <div class="ctx-card">
+      <p class="ctx-card-label">El modelo que se propone</p>
+      <p class="ctx-card-value">Presencia + Conversión<br />como sistema integrado</p>
+      <p class="ctx-card-desc">
+        Programmatic no reemplaza a los canales de performance — los potencia. El usuario que ve el aviso en un sitio premium como Infobae llega a Meta con mayor predisposición. El costo se justifica por el efecto multiplicador sobre los canales propios.
+      </p>
+    </div>
+    <div class="ctx-card">
+      <p class="ctx-card-label">Criterio de selección</p>
+      <p class="ctx-card-value">Eficiencia antes<br />que volumen</p>
+      <p class="ctx-card-desc">
+        Se priorizan canales y formatos con bajo costo de entrada, sin producción compleja y con activación rápida. El objetivo es lograr masa crítica de impactos sin comprometer la eficiencia general de la campaña.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════ PROGRAMMATIC ════════════════════════════════ -->
+<section>
+  <p class="section-eyebrow">02 — Canal</p>
+  <h2 class="section-title">Programmatic<br />Display & Video</h2>
+  <div class="divider"></div>
+  <p class="section-lead">
+    Se propone activar la campaña de forma directa con Infobae, mediante un deal Preferred/Guaranteed, garantizando presencia en uno de los sitios de mayor tráfico de noticias del país, con segmentación por dispositivo y sin la complejidad de coordinar múltiples publishers.
+  </p>
+
+  <!-- Lógica táctica -->
+  <div class="tactica-row">
+    <div class="tactica-num">01</div>
+    <div class="tactica-content">
+      <h4>Publisher: Infobae</h4>
+      <p>Mayor tráfico de noticias del país, con audiencia amplia y alto tiempo de permanencia en página. Infobae confirmó disponibilidad de formatos Display Standard y Video Preroll/Inline, con modalidad de compra Preferred o Guaranteed y segmentación por Desktop y Mobile.</p>
+    </div>
+  </div>
+
+  <div class="tactica-row">
+    <div class="tactica-num">02</div>
+    <div class="tactica-content">
+      <h4>Modalidad de compra: Preferred Deal</h4>
+      <p>Se prioriza Preferred sobre Guaranteed por la flexibilidad de activar y ajustar la pauta según performance durante el flight, sin comprometer volumen mínimo de entrega.</p>
+    </div>
+  </div>
+
+  <div class="tactica-row">
+    <div class="tactica-num">03</div>
+    <div class="tactica-content">
+      <h4>Segmentación de audiencia</h4>
+      <p>Segmentación por dispositivo (Desktop / Mobile) confirmada por Infobae. Se prioriza contenido afín a Hogar, Deco, Lifestyle y Real Estate cuando el inventario lo permita, para maximizar relevancia sin depender de cookies de terceros.</p>
+    </div>
+  </div>
+
+  <div class="tactica-row">
+    <div class="tactica-num">04</div>
+    <div class="tactica-content">
+      <h4>Lógica de frecuencia controlada</h4>
+      <p>Se negocia un cap de 4 impactos por usuario por semana para evitar saturación y mantener el costo por usuario único bajo, en línea con las métricas de alcance semanal acordadas para cada formato.</p>
+    </div>
+  </div>
+
+  <!-- Formatos -->
+  <p style="font-size:11px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--gris-texto); margin-top:56px; margin-bottom:0;">Formatos confirmados por Infobae</p>
+
+  <div class="formato-grid" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="formato-card">
+      <p class="formato-card-label">Display Standard</p>
+      <p class="formato-card-size">300×250 · 300×600</p>
+      <p class="formato-card-desc">Medium Rectangle y Half Page. Alta escala de inventario disponible en homepage y notas.</p>
+    </div>
+    <div class="formato-card">
+      <p class="formato-card-label">Video</p>
+      <p class="formato-card-size">Preroll / Inline</p>
+      <p class="formato-card-desc">Video nativo dentro de notas, autoplay silenciado. Permite mostrar productos en contexto real sin producción costosa.</p>
+    </div>
+  </div>
+
+  <!-- Nota creatividades -->
+  <div style="background:var(--gris-2); border-left:3px solid var(--rojo); padding:24px 28px; margin-top:40px;">
+    <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--rojo); margin-bottom:6px;">Nota sobre creatividades</p>
+    <p style="font-size:13px; color:var(--gris-texto); line-height:1.7;">El material de video del SALE (piezas de Meta) se puede reutilizar directamente para el formato Preroll/Inline sin producción adicional. Los banners de Display (300×250 y 300×600) sí requieren producción nueva, ya que no existen piezas en esos formatos dentro del material gráfico actual.</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════ PRESUPUESTO Y MÉTRICAS ════════════════════════════════ -->
+<section>
+  <p class="section-eyebrow">03 — Presupuesto</p>
+  <h2 class="section-title">Inversión y<br />métricas negociadas</h2>
+  <div class="divider"></div>
+  <p class="section-lead">
+    Métricas y CPM negociados directamente con Infobae para el período de campaña. Estos son los números sobre los que se cierra el deal final.
+  </p>
+
+  <div class="dooh-split">
+    <div class="dooh-card">
+      <h4>Display Standard</h4>
+      <ul>
+        <li>Duración: <strong style="color:var(--blanco)">5 semanas</strong></li>
+        <li>Impresiones por semana: <strong style="color:var(--blanco)">18.797</strong></li>
+        <li>Frecuencia: <strong style="color:var(--blanco)">4 impactos / semana</strong></li>
+        <li>Alcance semanal: <strong style="color:var(--blanco)">4.699 usuarios</strong></li>
+        <li>Impresiones totales (5 sem.): <strong style="color:var(--blanco)">93.985</strong></li>
+        <li>CPM vendido: <strong style="color:var(--blanco)">$9.533,40</strong></li>
+        <li>Inversión: <strong style="color:var(--blanco)">$896.000,00</strong></li>
+      </ul>
+    </div>
+    <div class="dooh-card dark">
+      <h4>Video Preroll / Inline</h4>
+      <ul>
+        <li>Duración: <strong style="color:var(--blanco)">5 semanas</strong></li>
+        <li>Impresiones por semana: <strong style="color:var(--blanco)">8.224</strong></li>
+        <li>Frecuencia: <strong style="color:var(--blanco)">4 impactos / semana</strong></li>
+        <li>Alcance semanal: <strong style="color:var(--blanco)">2.056 usuarios</strong></li>
+        <li>Impresiones totales (5 sem.): <strong style="color:var(--blanco)">41.120</strong></li>
+        <li>CPM vendido: <strong style="color:var(--blanco)">$21.791,00</strong></li>
+        <li>Inversión: <strong style="color:var(--blanco)">$896.000,00</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ctx-card accent" style="margin-top:2px;">
+    <p class="ctx-card-label">Inversión total del deal</p>
+    <p class="ctx-card-value">$1.792.000,00 ARS</p>
+    <p class="ctx-card-desc">135.105 impresiones totales combinadas (Display + Video) a lo largo de 5 semanas de flight, con un alcance semanal combinado estimado en 4.699 + 2.056 usuarios (sin dedupe entre formatos, ya que un mismo usuario puede recibir ambos).</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════ TIMING ════════════════════════════════ -->
+<section>
+  <p class="section-eyebrow">04 — Timing</p>
+  <h2 class="section-title">Calendario de<br />activación</h2>
+  <div class="divider"></div>
+  <p class="section-lead">
+    Se propone un esquema de intensidad progresiva: lanzamiento en la semana de apertura del SALE, sostenimiento durante septiembre y refuerzo en la recta final antes del cierre.
+  </p>
+
+  <div class="timeline">
+    <div class="tl-item active">
+      <p class="tl-period">Sem. 1 · 1–7 Sep</p>
+      <p class="tl-title">Lanzamiento</p>
+      <p class="tl-desc">Activación de Display y Video en Infobae. Máxima presión de alcance. Mensaje: apertura del SALE.</p>
+    </div>
+    <div class="tl-item active">
+      <p class="tl-period">Sem. 2–3 · 8–21 Sep</p>
+      <p class="tl-title">Sostenimiento</p>
+      <p class="tl-desc">Frecuencia estable en ambos formatos. Foco en audiencias que aún no convirtieron.</p>
+    </div>
+    <div class="tl-item active">
+      <p class="tl-period">Sem. 4 · 22–28 Sep</p>
+      <p class="tl-title">Mid-campaign</p>
+      <p class="tl-desc">Revisión de performance. Optimización de CPM efectivo y viewability real vs. lo negociado.</p>
+    </div>
+    <div class="tl-item active">
+      <p class="tl-period">Sem. 5 · 29–30 Sep</p>
+      <p class="tl-title">Cierre / Urgency</p>
+      <p class="tl-desc">Refuerzo de frecuencia con mensaje de deadline. Copy: "Últimos días del SALE".</p>
+    </div>
+    <div class="tl-item">
+      <p class="tl-period">Post · Oct</p>
+      <p class="tl-title">Análisis</p>
+      <p class="tl-desc">Reporte de reach incremental, CPM real vs. negociado y correlación con el uplift de tráfico orgánico durante el período.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════ PRÓXIMOS PASOS ════════════════════════════════ -->
+<section>
+  <p class="section-eyebrow">05 — Ejecución</p>
+  <h2 class="section-title">Próximos pasos</h2>
+  <div class="divider"></div>
+
+  <div class="pasos-list">
+    <div class="paso destacado">
+      <div class="paso-num">01</div>
+      <div class="paso-body">
+        <h4>Confirmar deal con Infobae</h4>
+        <p>Cerrar el CPM y el volumen negociado (Display y Video) en base a esta propuesta, y reservar el flight de 5 semanas.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">02</div>
+      <div class="paso-body">
+        <h4>Producir banners de Display y adaptar el video</h4>
+        <p>El video del SALE se reutiliza directamente para el formato Preroll/Inline. Los banners de 300×250 y 300×600 requieren producción nueva, ya que no existen piezas en esos formatos.</p>
+      </div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">03</div>
+      <div class="paso-body">
+        <h4>Setup de tracking y pixel</h4>
+        <p>Configurar el pixel correspondiente en el sitio para habilitar el retargeting programmatic y medir viewability de forma independiente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
